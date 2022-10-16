@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 
 class WebUI:
@@ -13,7 +13,7 @@ class WebUI:
             return self.index()
     
     def index(self):
-        return "WebUI works!"
+        return render_template("index.html")
 
     
     def run(self):
@@ -21,4 +21,5 @@ class WebUI:
 
 
 if __name__ == "__main__":
-    pass
+    app = WebUI(__name__)
+    app.run()
