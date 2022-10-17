@@ -79,3 +79,13 @@ body {
     border: none;
     cursor: pointer;
 }
+
+.search_inp{
+    width: 500px;
+}
+.search_results{
+    margin-top: 30px;
+    display: grid;
+    justify-content: center;
+
+}

@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request
+import engine
 
 class WebUI:
     def __init__(self, name, host='0.0.0.0', port='8080'):
@@ -11,10 +11,19 @@ class WebUI:
         @self.app.route('/')
         def __index():
             return self.index()
+
+        @self.app.route('/search')
+        def __search():
+            return self.search()
     
     def index(self):
         return render_template("index.html")
 
+    def search(self):
+        query = request.args.get("query")
+        #results = engine.search(query)
+        results = []
+        return render_template("results_page.html", query=query, links=results)
     
     def run(self):
         self.app.run(host=self.host, port=self.port)
