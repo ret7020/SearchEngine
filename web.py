@@ -21,9 +21,10 @@ class WebUI:
 
     def search(self):
         query = request.args.get("query")
-        #results = engine.search(query)
-        results = []
-        return render_template("results_page.html", query=query, links=results)
+        results = engine.search(query)
+        print(results)
+        #results = []
+        return render_template("results_page.html", query=query, links=results, res_count=len(results))
     
     def run(self):
         self.app.run(host=self.host, port=self.port)

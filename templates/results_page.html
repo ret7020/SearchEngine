@@ -10,10 +10,11 @@
     <div id="header">
         <div id="topbar">
             <img id="searchbarimage" src="/static/images/logo.png" />
-            <div id="searchbar" type="text">
-                <input id="searchbartext" type="text" value="computer engineering mutex concept" />
-
-            </div>
+            <form action="/search">
+                <div id="searchbar" type="text">
+                    <input id="searchbartext" type="text" value="{{query}}" name="query" />
+                </div>
+            </form>
 
         </div>
         <div id="optionsbar">
@@ -33,87 +34,20 @@
         </div>
     </div>
     <div id="searchresultsarea">
-        <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
-        <div class="searchresult">
-            <h2>Lock (computer science) - Wikipedia</h2>
-            <a>https://en.wikipedia.org/wiki/Lock_(computer_science)</a> <button>▼</button>
-            <p>In computer science, a lock or mutex (from mutual exclusion) is a synchronization mechanism for enforcing limits on access to a resource in an</p>
-            <p> environment where there are many threads of execution.</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>Mutual exclusion - Wikipedia</h2>
-            <a>https://en.wikipedia.org/wiki/Mutual_exclusion</a> <button>▼</button>
-            <p>For the concept in logic and probability theory, see Mutual exclusivity. Two nodes, i and i + 1, being removed simultaneously</p>
-            <p>results in node i + 1 not being removed. In computer science, mutual exclusion is a property of concurrency control, which is instituted ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>What is Mutual Exclusion (Mutex)? - Definition from Techopedia</h2>
-            <a>https://www.techopedia.com/definition/25629/mutual-exclusion-mutex</a> <button>▼</button>
-            <p>A mutual exclusion (mutex) is a program object that prevents simultaneous access to a shared resource. This concept is used in concurrent programming with a critical section, a piece of code in which processes or threads access a shared resource. ... This is furnished with algorithms ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>Mutex vs Semaphore - GeeksforGeeks</h2>
-            <a>https://www.geeksforgeeks.org/mutex-vs-semaphore/</a> <button>▼</button>
-            <p>It contains well written, well thought and well explained computer science and programming articles, ... The concept can be generalized using semaphore.</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>What is mutex? Webopedia Definition</h2>
-            <a>https://www.webopedia.com/TERM/M/mutex.html</a> <button>▼</button>
-            <p>In computer programming, a mutual exclusion object (mutex) is a program object that allows multiple program threads to share the same resource, such as file access, but not simultaneously.</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>concurrency - Reader and Writer mutex - Computer Science Stack ...</h2>
-            <a>https://cs.stackexchange.com/questions/64815/reader-and-writer-mutex</a> <button>▼</button>
-            <p>Oct 19, 2016 - Lets begin with defining some terms. Semaphore is one form of software implementation for process synchronization. It's an int value that is ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>Concurrency (computer science): If a binary semaphore can be used ...</h2>
-            <a>https://www.quora.com/Concurrency-computer-science-If-a-binary-semaphore-can-be-used-to-achieve-mutual-exclusion-then-why-does-the-concept-of-a-mutex-exist</a> <button>▼</button>
-            <p>Mar 29, 2016 - You might want to see What is the difference between a mutex and a semaphore? especially Quora User answer to it. A binary semaphore is semantically same ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>What is a mutex? - Stack Overflow</h2>
-            <a>https://stackoverflow.com/questions/34524/what-is-a-mutex</a> <button>▼</button>
-            <p>Actually, this is just extending the analogy, but you get the idea. .... The concept is called "mutual exclusion" (short Mutex), and is a way to ensure that only one ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>ELI5: In computer science what is a mutex? : explainlikeimfive ...</h2>
-            <a>https://www.reddit.com/r/explainlikeimfive/comments/29prmj/eli5_in_computer_science_what_is_a_mutex/</a> <button>▼</button>
-            <p>Today's fun fact: The word "mutex" is shorthand for "mutual exclusion". The more you know... A mutex is basically a programmatic device that ...</p>
-        </div>
-
-        <div class="searchresult">
-            <h2>Basics of Mutex and Semaphore (part 1) – geekgirl decodes</h2>
-            <a>https://geekgirldecodes.com/2016/09/13/mutex-and-semaphore/</a> <button>▼</button>
-            <p>Sep 13, 2016 - The age old question of what constitutes a mutex and a semaphore, is one of the most fundamental concepts that computer science engineers ...</p>
-        </div>
-        <div class="relatedsearches">
-            <h3>Searches related to computer engineering mutex concept</h3>
-            <div class="relatedlists">
-                <ul class="relatedleft">
-                    <li>what is <b>mutex</b> and semaphore</li>
-                    <li><b>mutex</b> lock c++</li>
-                    <li><b>mutex</b> java</li>
-                    <li><b>mutex</b> c++</li>
-                </ul>
-                <ul class="relatedright">
-                    <li><b>mutex</b> vs lock</li>
-                    <li><b>mutex</b> semaphore example</li>
-                    <li><b>mutex</b> and semaphore example in c</li>
-                    <li><b>mutex</b> c#</li>
-                </ul>
+        <p id="searchresultsnumber">About {{res_count}} results  </p>
+        {% for link in links %}
+            <div class="searchresult">
+                <h2>Lock (computer science) - Wikipedia</h2>
+                <a href="{{link}}" target="_blank">{{link}}</a> <button>▼</button>
+                <p>In computer science, a lock or mutex (from mutual exclusion) is a synchronization mechanism for enforcing
+                    limits on access to a resource in an</p>
+                <p> environment where there are many threads of execution.</p>
             </div>
-        </div>
+        {% endfor %}
 
-        <div class="pagebar">
+
+
+        <!--<div class="pagebar">
             <ul class="pagelist">
                 <li class="pagelistprevious">Previous</li>
                 <li class="pagelistfirst">1</li>
@@ -128,13 +62,12 @@
                 <li class="pagelistnumber">10</li>
                 <li class="pagelistnext">Next</li>
             </ul>
-        </div>
+        </div> -->
     </div>
 
     <div id="footer">
         <div id="footerlocation">
-            <p>Somewhere, Moon </p>
-            <p> - From your phone (Location History) - Use precise location - Learn more</p>
+            <p>We use country for search results from your search settings</p>
         </div>
 
         <ul id="footermenu">
