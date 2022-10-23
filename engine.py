@@ -17,7 +17,7 @@ def parser(data):
         link = div.find('a', href=True)
         title = div.find('h3')
         if (link and title):
-            all_links.append(link['href'])
+            all_links.append((link['href'], title.contents[0]))
     return all_links
 
 
