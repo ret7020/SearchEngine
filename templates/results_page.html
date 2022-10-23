@@ -39,9 +39,9 @@
             <div class="searchresult">
                 <h2 onclick="window.location.href='{{link[0]}}'" style="cursor: pointer;">{{link[1]}}</h2>
                 <a href="{{link[0]}}" target="_blank">{{link[0]}}</a> <button>▼</button>
-                <p>In computer science, a lock or mutex (from mutual exclusion) is a synchronization mechanism for enforcing
-                    limits on access to a resource in an</p>
-                <p> environment where there are many threads of execution.</p>
+                <p>
+                    {{link[2] | safe}}
+                </p>
             </div>
         {% endfor %}
 

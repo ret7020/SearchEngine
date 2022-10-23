@@ -16,8 +16,16 @@ def parser(data):
     for div in result_blocks:
         link = div.find('a', href=True)
         title = div.find('h3')
+        descr_div = div.select('div[data-content-feature]')
+        description = "Not parsed"
+        if len(descr_div) > 0:
+            description = descr_div[0].find_all('span')
+            description_buff = []
+            for span in description:
+                description_buff.append(str(span.contents[0]))
+            description = ''.join(description_buff)
         if (link and title):
-            all_links.append((link['href'], title.contents[0]))
+            all_links.append((link['href'], title.contents[0], description))
     return all_links
 
 
