@@ -2,6 +2,30 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request
 import requests
+from requests_html import HTMLSession
+import time
+
+class HTTPService:
+    '''
+    New and fast http service to make requests to google
+    '''
+    def __init__(self):
+        self.session = HTMLSession()
+        self.ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
+
+    def make_req(self, query):
+        result = self.session.get(f"https://www.google.com/search?q={query}$cr=countryEN&num=40")
+        return result.text
+
+def req_via_proxy(query, proxy, country_search_code="EN", res_number=40):
+    proxies = {'http': proxy, 'https': proxy} 
+    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
+    print(requests.get("https://ident.me", proxies=proxies).text)
+    req = requests.get(f"http://www.google.com/search?q={query}&cr=country{country_search_code}&num={res_number}", headers={'User-agent': ua}, proxies=proxies)
+    return req.text
+
+    
+
 
 def make_req_requests(query, country_search_code, res_number):
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
@@ -39,11 +63,26 @@ def make_request(query, proxy="nn", country_search_code="EN", res_number=100):
             file.write(res)
         return res
 
-def search(query, country_search_code="EN", res_number=20):
-    cont = make_req_requests(query, country_search_code, res_number)
+def search(query, country_search_code="EN", res_number=20, mode="pure", http_service=None):
+    if mode == "pure":
+        cont = make_req_requests(query, country_search_code, res_number)
+    elif mode == "proxy":
+        cont = req_via_proxy(query=query, proxy="http://68.183.191.179:44290")
+    elif mode == "new": # For tests BETA
+        cont = http_service.make_req(query)
+
     return parser(cont)
 
 
 if __name__ == "__main__":
-    res = search("Null pointer exception c++")
+    print("[DEBUG] Native request")
+    time_start = time.time()
+    res = search(query="Null pointer exception c++", mode="pure")
+    spent = time.time() - time_start
+    print(f"[DEBUG] Time spent: {spent}; About {1 / spent} RPS")
     print(res)
+    http = HTTPService()
+    time_start = time.time()
+    search("null pointer", http_service=http)
+    spent = time.time() - time_start
+    print(f"[DEBUG] Time spent: {spent}; About {1 / spent} RPS")
