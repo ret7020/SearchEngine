@@ -34,11 +34,11 @@
         </div>
     </div>
     <div id="searchresultsarea">
-        <p id="searchresultsnumber">About {{res_count}} results  </p>
+        <p id="searchresultsnumber">About {{res_count}} results.</p>
         {% for link in links %}
             <div class="searchresult">
                 <h2 onclick="window.location.href='{{link[0]}}'" style="cursor: pointer;">{{link[1]}}</h2>
-                <a href="{{link[0]}}" target="_blank">{{link[0]}}</a> <button>▼</button>
+                <a href="{{link[0]}}" target="__blank">{{link[0]}}</a> <button>▼</button>
                 <p>
                     {{link[2] | safe}}
                 </p>
@@ -74,7 +74,7 @@
             <li>Help</li>
             <li>Send feedback</li>
             <li>Privacy</li>
-            <li>Terms</li>
+            <li>Help us</li>
         </ul>
     </div>
 </body>

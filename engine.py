@@ -73,6 +73,11 @@ def search(query, country_search_code="EN", res_number=20, mode="pure", http_ser
 
     return parser(cont)
 
+def search_via_spr(query: str, spr_server: str, country_search_code: str = "EN", res_number: int = 40):
+    data = requests.get(f"{spr_server}/search?query={query}").json()
+    return parser(data["data"])
+    
+
 
 if __name__ == "__main__":
     print("[DEBUG] Native request")
